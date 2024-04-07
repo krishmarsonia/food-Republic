@@ -13,8 +13,30 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        primepink: "#FF4A6F",
+        backGrey: "#FEF5E4",
+        magicgreen: "#10B985",
+        lightPink: "#fff8f9"
+      }
     },
+    
   },
-  plugins: [],
+  plugins: [
+    function ({addUtilities} : any){
+      const newUtilities = {
+        ".no-scrollbar::-webkit-scrollbar": {
+          display: "none",
+        },
+        ".no-scrollbar": {
+          "-ms-overflow-style": "none",
+          "scrollbar-width": "none",
+        }
+      }
+
+      addUtilities(newUtilities);
+    }
+  ],
+  darkMode: "class"
 };
 export default config;
