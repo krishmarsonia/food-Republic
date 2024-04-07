@@ -15,9 +15,9 @@ const Recipes = () => {
   if (loading) {
     return <h1>Loading</h1>;
   }
-  //   if(!loading){
-  //     console.log(data.recipes);
-  //   }
+  if (!loading) {
+    console.log(data);
+  }
   return (
     <div className="p-4 pt-20 bg-lightPink">
       {/* ---------------Heading---------------- */}
@@ -55,9 +55,7 @@ const Recipes = () => {
             </div>
           </div>
           <div className="text-lg">
-            <span className="text-lg font-medium">
-              Select Cusine:
-            </span>{" "}
+            <span className="text-lg font-medium">Select Cusine:</span>{" "}
             <select
               name="CusineSelect"
               id="CusineSelect"
@@ -110,17 +108,22 @@ const Recipes = () => {
                 return fd.foodType === "Veg";
               }
             }
-          ).filter((cd: {_id: string;
-            image: string;
-            title: string;
-            cusineType: string;
-            foodType: "All" | "Veg" | "Non-Veg";}) => {
-              if(cusineSelect === "All"){
+          )
+          .filter(
+            (cd: {
+              _id: string;
+              image: string;
+              title: string;
+              cusineType: string;
+              foodType: "All" | "Veg" | "Non-Veg";
+            }) => {
+              if (cusineSelect === "All") {
                 return true;
-              }else {
-                return cd.cusineType === cusineSelect
+              } else {
+                return cd.cusineType === cusineSelect;
               }
-          })
+            }
+          )
           .map(
             (da: {
               _id: string;
