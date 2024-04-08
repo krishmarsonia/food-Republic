@@ -45,6 +45,7 @@ const typeDefs = `#graphql
         recipes: [Recipe],
         recipe(id: ID!): Recipe!,
         userRecipe(userId: ID!): [Recipe!]
+        moreUserRecipes(userId: ID!): [Recipe!]
     }
 
     type Mutation {
@@ -111,6 +112,9 @@ const resolvers = {
       const user = await User.findOne({ clerkId: args.userId });
       return await Recipe.find({ user: user._id });
     },
+    moreUserRecipes: async (_: any, args: {userId: string}) => {
+      return await Recipe.find({user: args.userId});
+    }
   },
   Recipe: {
     user: async (parent: {

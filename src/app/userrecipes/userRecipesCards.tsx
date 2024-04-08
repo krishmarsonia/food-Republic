@@ -26,7 +26,8 @@ const UserRecipesCards = ({ userId }: { userId: string | null }) => {
           foodType: string;
         }) => {
           return (
-            <Link href={`recipe/${recipe._id}`} key={recipe._id}>
+            // <Link href={`recipe/${recipe._id}`} key={recipe._id}>
+            <div className="mb-14">
               <Card
                 _id={recipe._id}
                 image={recipe.image}
@@ -35,7 +36,8 @@ const UserRecipesCards = ({ userId }: { userId: string | null }) => {
                 foodType={recipe.foodType}
                 update={userId ? true : false}
               />
-            </Link>
+              </div>
+            // </Link>
           );
         }
       )}

@@ -28,6 +28,7 @@ export const GET_RECIPE = gql`
       }
       user {
         firstName
+        _id
       }
       cookingTime
       difficulty
@@ -50,3 +51,13 @@ export const GET_USER_RECIPE = gql`
     }
   }
 `;
+
+export const GET_USER_MORE_RECIPE = gql`
+  query getUserMoreRecipes($userId: ID!) {
+    moreUserRecipes(userId: $userId){
+      _id,
+      image,
+      title
+    }
+  }
+`

@@ -35,7 +35,8 @@ const config: Config = {
       }
 
       addUtilities(newUtilities);
-    }
+    },
+    require("tailwind-scrollbar-hide")
   ],
   darkMode: "class"
 };

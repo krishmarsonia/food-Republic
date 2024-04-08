@@ -19,7 +19,7 @@ const Recipes = () => {
     console.log(data);
   }
   return (
-    <div className="p-4 pt-20 bg-lightPink">
+    <div className="p-4 pt-20 bg-lightPink scrollbar-hide">
       {/* ---------------Heading---------------- */}
       <h1 className="text-center text-4xl font-medium mt-5">
         All Your Favourite{" "}
@@ -31,7 +31,11 @@ const Recipes = () => {
           <div className="flex justify-center items-center mt-7 flex-wrap">
             <div>
               <button
-                className="bg-white text-primepink w-32 h-11"
+                className={`${
+                  foodSelect === "All"
+                    ? `bg-white text-primepink`
+                    : `bg-primepink text-white`
+                } w-32 h-11`}
                 onClick={() => setFoodSelect("All")}
               >
                 All Recipes
@@ -39,7 +43,11 @@ const Recipes = () => {
             </div>
             <div>
               <button
-                className="bg-primepink text-white w-32 h-11"
+                className={`${
+                  foodSelect === "Veg"
+                    ? `bg-white text-primepink`
+                    : `bg-primepink text-white`
+                } w-32 h-11`}
                 onClick={() => setFoodSelect("Veg")}
               >
                 Veg
@@ -47,7 +55,11 @@ const Recipes = () => {
             </div>
             <div>
               <button
-                className="bg-primepink text-white w-32 h-11"
+                className={`${
+                  foodSelect === "Non-Veg"
+                    ? `bg-white text-primepink`
+                    : `bg-primepink text-white`
+                } w-32 h-11`}
                 onClick={() => setFoodSelect("Non-Veg")}
               >
                 Non-Veg
@@ -90,7 +102,7 @@ const Recipes = () => {
         </div>
       </div>
       {/* ----------Cards------------------ */}
-      <div className="flex justify-between mt-8 mx-36 flex-wrap overflow-y-scroll no-scrollbar">
+      <div className="flex justify-between mt-8 mx-36 flex-wrap overflow-y-scroll no-scrollbar ">
         {data.recipes
           .filter(
             (fd: {
@@ -133,15 +145,18 @@ const Recipes = () => {
               foodType: "All" | "Veg" | "Non-Veg";
             }) => {
               return (
-                <Link key={da._id} href={`recipe/${da._id}`}>
+                // <Link key={da._id} href={`recipe/${da._id}`}>
+                <div className="mb-14">
                   <Card
+                    key={da._id}
                     _id={da._id}
                     image={da.image}
                     title={da.title}
                     cusineType={da.cusineType}
                     foodType={da.foodType}
                   />
-                </Link>
+                </div>
+                // </Link>
               );
             }
           )}
