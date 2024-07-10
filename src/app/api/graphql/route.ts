@@ -112,9 +112,9 @@ const resolvers = {
       const user = await User.findOne({ clerkId: args.userId });
       return await Recipe.find({ user: user._id });
     },
-    moreUserRecipes: async (_: any, args: {userId: string}) => {
-      return await Recipe.find({user: args.userId});
-    }
+    moreUserRecipes: async (_: any, args: { userId: string }) => {
+      return await Recipe.find({ user: args.userId });
+    },
   },
   Recipe: {
     user: async (parent: {
@@ -207,27 +207,44 @@ const resolvers = {
       let updatedRecipe;
       console.log("187", recipe);
       if (recipe.image === null) {
-        updatedRecipe = await Recipe.findByIdAndUpdate(recipe._id, {
-          title: recipe.title,
-          preparationTime: recipe.preparationTime,
-          servings: recipe.servings,
-          cookingTime: recipe.cookingTime,
-          difficulty: recipe.difficulty,
-          ingredients: recipe.ingredients,
-          description: recipe.description,
-        });
+        updatedRecipe = await Recipe.findByIdAndUpdate(
+          recipe._id,
+          {
+            title: recipe.title,
+            preparationTime: recipe.preparationTime,
+            servings: recipe.servings,
+            cookingTime: recipe.cookingTime,
+            difficulty: recipe.difficulty,
+            $set: {
+              ingredients: recipe.ingredients,
+              description: recipe.description,
+            },
+            // ingredients: recipe.ingredients,
+            // description: recipe.description,
+          },
+          { new: true }
+        );
       } else {
-        updatedRecipe = await Recipe.findByIdAndUpdate(recipe._id, {
-          title: recipe.title,
-          image: recipe.image,
-          preparationTime: recipe.preparationTime,
-          servings: recipe.servings,
-          cookingTime: recipe.cookingTime,
-          difficulty: recipe.difficulty,
-          ingredients: recipe.ingredients,
-          description: recipe.description,
-        });
+        updatedRecipe = await Recipe.findByIdAndUpdate(
+          recipe._id,
+          {
+            title: recipe.title,
+            image: recipe.image,
+            preparationTime: recipe.preparationTime,
+            servings: recipe.servings,
+            cookingTime: recipe.cookingTime,
+            difficulty: recipe.difficulty,
+            $set: {
+              ingredients: recipe.ingredients,
+              description: recipe.description,
+            },
+            // ingredients: recipe.ingredients,
+            // description: recipe.description,
+          },
+          { new: true }
+        );
       }
+      console.log(updatedRecipe);
       const res = await Recipe.find();
       return res[0];
     },

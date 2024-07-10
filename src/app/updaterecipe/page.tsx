@@ -391,6 +391,7 @@ const AddRecipe = () => {
                             ...methods,
                             { _id: v4(), value: inpMethod },
                           ];
+                          
                           setMethods([...tempMethod]);
                           setInpMethod("");
                         }
